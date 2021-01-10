@@ -1,0 +1,354 @@
+/**
+ * Demo app styles.
+ */
+$padSpace: 1.2em;
+$lineWidth: 2px;
+$lineStyle: solid;
+$lineColor: rgba( 255, 255, 255, 0.04 );
+$lineJoin: 4px;
+$fontFamily: 'Kreon', 'Helvetica', 'Arial', sans-serif;
+$fontSize: 20px;
+$colorDocument: #24293f;
+$colorDocumentText: #e0e8ec;
+$fxSpeed: 400ms;
+$fxEase: cubic-bezier( 0.215, 0.610, 0.355, 1.000 );
+$fxEaseBounce: cubic-bezier( 0.640, -0.280, 0.050, 1.405 );
+$sizeSmall: 420px;
+$sizeMedium: 720px;
+$sizeLarge: 1280px;
+$screenSmall: "only screen and (min-width : #{$sizeSmall})";
+$screenMedium: "only screen and (min-width : #{$sizeMedium})";
+$screenLarge: "only screen and (min-width : #{$sizeLarge})";
+
+/**
+ * Global resets and documet setup.
+ */
+
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background-color: transparent;
+  text-transform: none;
+  text-shadow: none;
+  box-shadow: none;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -webkit-overflow-scrolling: touch;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform-style: flat;
+  transition:
+    color $fxSpeed $fxEase,
+    border-color $fxSpeed $fxEase,
+    background-color $fxSpeed $fxEase,
+    opacity $fxSpeed $fxEase,
+    transform $fxSpeed $fxEase;
+}
+
+// remove ouline fro active elements
+*:active, *:hover, *:focus {
+  outline: none !important;
+}
+
+// Block types
+article, aside, details, figcaption, figure, footer, header, hgroup,
+menu, nav, section, main, summary, div, h1, h2, h3, h4, h5, h6, hr,
+p, ol, ul, form, img {
+  display: block;
+}
+
+// Document
+html, body {
+  display: block;
+  position: relative;
+  max-width: 100vw;
+  min-height: 100vh;
+}
+html {
+  overflow: hidden;
+  overflow-y: scroll;
+}
+body {
+  font-family: $fontFamily;
+  font-size: calc( #{$fontSize} - 4px );
+  line-height: 1.5em;
+  background-color: $colorDocument;
+  color: $colorDocumentText;
+
+  @media #{$screenMedium} {
+    font-size: calc( #{$fontSize} - 2px );
+  }
+  @media #{$screenLarge} {
+    font-size: $fontSize;
+  }
+}
+
+// not visible or usable
+.cloaked, [cloaked] {
+  pointer-events: none;
+  opacity: 0;
+}
+
+// visible but not usable
+.disabled, [disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+// links
+a {
+  text-decoration: none;
+  color: lighten( $colorDocument, 50% );
+
+  &:hover {
+    color: lighten( $colorDocument, 40% );
+  }
+}
+
+// horizontal lines
+hr {
+  display: block;
+  margin: $padSpace 0;
+  border: 0;
+  border-top: $lineWidth $lineStyle $lineColor;
+}
+
+// paragraphs
+p {
+  line-height: inherit;
+  margin: 0 0 $padSpace 0;
+  padding: 0;
+
+  &:last-of-type {
+    margin: 0;
+  }
+}
+
+// original headings
+h1, h2, h3, h4, h5, h6 {
+  display: block;
+  padding: 0;
+  line-height: 1.2em;
+  font-weight: normal;
+}
+h1 { font-size: 240%; }
+h2 { font-size: 210%; }
+h3 { font-size: 180%; }
+h4 { font-size: 150%; }
+h5 { font-size: 120%; }
+h6 { font-size: 100%; }
+
+// lists
+ul, ol {
+  display: block;
+  list-style: circle;
+
+  li {
+    line-height: 1.2em;
+    margin: ( $padSpace / 4 ) $padSpace;
+    margin-right: 0;
+    padding: 0;
+  }
+}
+
+// common inner container
+.container {
+  display: block;
+  margin: 0 auto;
+  padding: 0 $padSpace;
+  width: 100%;
+
+  @media #{$screenMedium} {
+    padding: 0;
+    width: 92%;
+  }
+  @media #{$screenLarge} {
+    max-width: $sizeLarge;
+  }
+}
+
+// common headings
+.heading {
+  display: block;
+  overflow: visible !important;
+  margin: 0 0 $padSpace 0;
+  padding: 0;
+  line-height: 1em;
+}
+
+// hidden elements
+.reveal {
+  transform: scale( .5 );
+  opacity: 0;
+
+  &.visible {
+    transform: scale( 1 );
+    opacity: 1;
+  }
+}
+
+// lazy-load image container
+.images {
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 0 $padSpace 0;
+
+    &:last-of-type {
+      margin: 0;
+    }
+  }
+}
+
+// buttons
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  line-height: 1em;
+  font-weight: bold;
+  padding: .5em 1em;
+  color: lighten( $colorDocument, 10% );
+  background-color: $colorDocumentText;
+  border-radius: $lineJoin;
+  box-shadow: 0px 1px 3px rgba( 0, 0, 0, 0.4 );
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken( $colorDocumentText, 10% );
+  }
+}
+
+// common white cards
+.card {
+  display: block;
+  margin: 0 0 $padSpace 0;
+  padding: $padSpace;
+  background-color: $lineColor;
+  border-radius: $lineJoin;
+}
+
+// rows
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: stretch;
+
+  &.flex-row-reverse {
+    flex-direction: row-reverse;
+  }
+  &.flex-space {
+    justify-content: space-between;
+  }
+  &.flex-middle {
+    align-items: center;
+  }
+  &.flex-bottom {
+    align-items: flex-end;
+  }
+  .flex-1 {
+    flex: 1;
+  }
+}
+
+// page header
+.header {
+  display: block;
+  position: fixed;
+  padding: $padSpace 0;
+  background-color: transparent;
+  border-bottom: $lineWidth $lineStyle $lineColor;
+  width: 100%;
+  opacity: 1;
+  z-index: 999;
+
+  &.hidden {
+    transform: translateY( -100px );
+    opacity: 0;
+  }
+  &.solid {
+    border-color: transparent;
+    background-color: lighten( $colorDocument, 10% );
+    box-shadow: 0px 2px 8px rgba( 0, 0, 0, 0.5 );
+  }
+
+  .logo {
+    line-height: 1em;
+    letter-spacing: 2px;
+    margin: 0;
+    padding: 0;
+  }
+  .description {
+    padding: 10px 0 0 0;
+    opacity: .75;
+  }
+}
+
+// page main content
+.main {
+  position: relative;
+  padding-top: 6.2em;
+
+  .stats-wrap {
+    position: sticky;
+    top: 6.2em;
+    width: 220px;
+
+    &.moveup {
+      transform: translateY( -100px );
+    }
+    span { color: tan; }
+  }
+  .content-wrap {
+    margin-right: $padSpace;
+    padding-right: $padSpace;
+    border-right: $lineWidth $lineStyle $lineColor;
+  }
+}
+
+// page footer
+.footer {
+  text-align: center;
+  padding-bottom: $padSpace;
+}
+
+// common margins
+.push-top {
+  margin-top: $padSpace;
+}
+.push-right {
+  margin-right: $padSpace;
+}
+.push-bottom {
+  margin-bottom: $padSpace;
+}
+.push-left {
+  margin-left: $padSpace;
+}
+.push-all {
+  margin: $padSpace;
+}
+
+// common paddings
+.pad-top {
+  padding-top: $padSpace;
+}
+.pad-right {
+  padding-right: $padSpace;
+}
+.pad-bottom {
+  padding-bottom: $padSpace;
+}
+.pad-left {
+  padding-left: $padSpace;
+}
+.pad-all {
+  padding: $padSpace;
+}
+
+
+
